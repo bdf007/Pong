@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public float difficultyMultiplier = 1.3f;
 
     public float minXSpeed = 0.8f;
     public float maxXSpeed = 1.2f;
@@ -47,12 +48,12 @@ public class Ball : MonoBehaviour
             // collided with the right paddle
             if (collision.transform.position.x > transform.position.x && rb.velocity.x > 0)
             {
-                rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+                rb.velocity = new Vector2(-rb.velocity.x * difficultyMultiplier, rb.velocity.y * difficultyMultiplier);
             }
             // collided with the left paddle
             if (collision.transform.position.x < transform.position.x && rb.velocity.x < 0)
             {
-                rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+                rb.velocity = new Vector2(-rb.velocity.x * difficultyMultiplier, rb.velocity.y * difficultyMultiplier);
             }
         }
     }
