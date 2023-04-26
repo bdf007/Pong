@@ -12,10 +12,12 @@ public class Ball : MonoBehaviour
     public float maxYSpeed = 1.2f;
 
     private Rigidbody2D rb;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         rb.velocity = new Vector2(Random.Range(minXSpeed,maxYSpeed) * (Random.value > 0.5f ? -1 :1 ), Random.Range(minYSpeed,maxYSpeed) * (Random.value > 0.5f ? -1 : 1));
     }
 
@@ -30,6 +32,8 @@ public class Ball : MonoBehaviour
         // collided with the limit
         if(collision.tag == "Limit")
         {
+            // play the sound
+            audioSource.Play();
             // collided with the top limit
             if(collision.transform.position.y > transform.position.y && rb.velocity.y>0)
             {
@@ -45,6 +49,8 @@ public class Ball : MonoBehaviour
         // collided with the paddle
         else if (collision.tag == "Paddle")
         {
+            // play the sound
+            audioSource.Play();
             // collided with the right paddle
             if (collision.transform.position.x > transform.position.x && rb.velocity.x > 0)
             {
